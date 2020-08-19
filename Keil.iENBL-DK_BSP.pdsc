@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd" schemaVersion="1.6.0">
+  <name>iENBL-DK_BSP</name>
+  <vendor>Keil</vendor>
+  <description>Flex iENBL Development Kit Board Support Pack</description>
+  <url>https://github.com/MDK-Packs/Pack/raw/master/iENBL-DK_BSP/</url>
+  <repository type="git">https://github.com/MDK-Packs/iENBL-DK_BSP.git</repository>
+
+  <releases>
+    <release version="0.1.0">
+      Initial version.
+    </release>
+  </releases>
+
+  <keywords>
+    <!-- keywords for indexing -->
+    <keyword>Flex</keyword>
+    <keyword>Board Support Pack</keyword>
+    <keyword>iENBL</keyword>
+  </keywords>
+
+  <requirements>
+    <packages>
+      <package vendor="Keil" name="STM32L4xx_DFP" version="2.4.1-0"/>
+    </packages>
+  </requirements>
+
+  <conditions>
+    <condition id="STM32L496QE">
+      <description>STMicroelectronics STM32L496QE Devices</description>
+      <require Dvendor="STMicroelectronics:13" Dname="STM32L496QE*"/>
+    </condition>
+
+    <!-- iENBL BSP Conditions -->
+    <condition id="iENBL VIO">
+      <description>Virtual I/O iENBL</description>
+      <require condition="STM32L496QE"/>
+    </condition>
+  </conditions>
+
+  <components>
+    <!-- VIO component for iENBL -->
+    <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant= "iENBL" Cversion="1.0.0" Capiversion="0.1.0" condition="iENBL VIO">
+      <description>Virtual I/O implementation for Flex iENBL</description>
+      <RTE_Components_h>
+        #define RTE_VIO_BOARD
+        #define RTE_VIO_iENBL
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="Drivers/Platform/vio_iENBL.c"/>
+      </files>
+    </component>
+  </components>
+
+  <boards>
+    <!-- Flex iENBL Board Support-->
+    <board vendor="Flex" name="iENBL" revision="Rev.V2"
+           salesContact="https://flex.com/connect"
+           orderForm   ="">
+      <description>iENBL development kit with STM32L496QEI MCU</description>
+      <image small="Images/iENBL_small.jpg"
+             large="Images/iENBL_large.jpg" public="true"/>
+      <book category="overview"  name="https://flex.com/resources/ienbl"     title="iENBL IoT development platform"/>
+      <book category="overview"  name="Documents/Overview.pdf"               title="Overview"                   public="true"/>
+      <book category="manual"    name="Documents/UM_Breakout_Board_v24.pdf"  title="Breakout Board User Manual" public="true"/>
+      <book category="schematic" name="Documents/Sch_froa_103_41_1_c.pdf"    title="Main Board Schematics"      public="true"/>
+      <book category="schematic" name="Documents/Sch_FROA_103_34_C_BooL.pdf" title="Breakout Board Schematics"  public="true"/>
+      <mountedDevice    deviceIndex="0" Dvendor="STMicroelectronics:13" Dname="STM32L496QEIx"/> 
+      <compatibleDevice deviceIndex="0" Dvendor="STMicroelectronics:13" DsubFamily="STM32L496QEx"/>
+      <feature type="PWR"           n="5"                name="USB Powered"/>
+      <feature type="Batt"          n="1"                name="1320mAh Rechargeable battery"/>
+      <feature type="ROM"           n="1"                name="16-Mbit SPI Flash memory (W25Q16FWUXIE)"/>
+      <feature type="Button"        n="2"                name="Push-Buttons"/>
+      <feature type="LED"           n="4"                name="Multicolor LEDs"/>
+      <feature type="MemCard"       n="1"                name="microSD card holder"/>
+      <feature type="USB"           n="1"                name="Micro USB Type-B FS"/>
+      <feature type="Accelerometer" n="2"                name="3-axis digital Accelerometer (LIS2DH12, LSM6DSL)"/>
+      <feature type="Gyro"          n="1"                name="3-axis digital Gyroscope (LSM6DSL)"/>
+      <feature type="PressSens"     n="1"                name="Digital barometer (LPS22HB)"/>
+      <feature type="LightSens"     n="1"                name="Ambient Light Sensor (MAX44009)"/>
+      <feature type="SensOther"     n="1"                name="Humidity Sensor (HTS221)"/>
+      <feature type="SensOther"     n="1"                name="Digital-Switch Hall Effect Sensor (DRV5032FADMR)"/>
+      <feature type="MIC"           n="1"                name="Digital Microphone (MP34DT05TR-A)"/>
+      <feature type="Speaker"       n="1"/> 
+      <debugInterface adapter="CMSIS-DAP" connector="20-pin Arm Standard JTAG Connector"/>
+      <debugInterface adapter="ST-Link"   connector="20-pin Arm Standard JTAG Connector"/>
+      <debugInterface adapter="J-Link"    connector="20-pin Arm Standard JTAG Connector"/>
+    </board>
+  </boards>
+
+  <examples>
+    <example name="Blinky" doc="README.md" folder="Projects/Blinky">
+      <description>CMSIS-RTOS2 Blinky example with VIO</description>
+      <board name="iENBL" vendor="Flex"/>
+      <project>
+        <environment name="uv" load="Blinky.uvprojx"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="CMSIS" Cgroup="RTOS"/>
+        <component Cclass="CMSIS Driver" Cgroup="VIO"/>
+        <category>Getting Started</category>
+      </attributes>
+    </example>
+
+    <example name="Platform" doc="README.md" folder="Projects/Platform">
+      <description>CMSIS-RTOS2 Platform example with VIO</description>
+      <board name="iENBL" vendor="Flex"/>
+      <project>
+        <environment name="uv" load="Platform.uvprojx"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="CMSIS" Cgroup="RTOS"/>
+        <component Cclass="CMSIS Driver" Cgroup="VIO"/>
+        <category>Getting Started</category>
+      </attributes>
+    </example>
+  </examples>
+</package>
