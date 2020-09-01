@@ -102,24 +102,61 @@ The board layer contains the following configured interface drivers:
 | PF14         | I2C4_SCL          | Alternate Function Open Drain, Pull-up, Very High speed          | CELL_I2C_SCL
 | PF15         | I2C4_SDA          | Alternate Function Open Drain, Pull-up, Very High speed          | CELL_I2C_SDA
 | PG1          |                   | Output Push Pull, Low output level, Low speed                    | CELL_FLIGHTMODE_EN
-| PG7          | LPUART1_TX        | Alternate Function Push Pull, Very High speed                    | EXT_UART_TX
-| PG8          | LPUART1_RX        | Alternate Function Push Pull, Very High speed                    | EXT_UART_RX
 | PG11         |                   | Output Open Drain, Low output level, Low speed                   | WIFI_BOOT   
 | PG15         |                   | Output Push Pull, Low output level, Low speed                    | WIFI_CHIP_EN
+
+### NVIC Configuration
+
+ - Priority Group = 4 bits for preemption priority 0 bits for subpriority
+
+| NVIC Interrupt                          | Preempt Priority | Code Generation
+|:----------------------------------------|:-----------------|:---------------
+| Non maskable interrupt                  | 0                | Generate IRQ handler
+| Hard fault interrupt                    | 0                | Generate IRQ handler
+| Memory Management fault                 | 0                | Generate IRQ handler
+| Prefetch fault, memory access fault     | 0                | Generate IRQ handler
+| Undefined instruction or illegal state  | 0                | Generate IRQ handler
+| System service call via SWI instruction | 0                | none
+| Debug monitor                           | 0                | Generate IRQ handler
+| Pendable request for system service     | 0                | none
+| Time base: System tick timer            | 0                | none
+| SPI1 global                             | 0                | Generate IRQ handler, Call HAL handler
+| USART1 global                           | 0                | Generate IRQ handler, Call HAL handler
+| USART2 global                           | 0                | Generate IRQ handler, Call HAL handler
+| USART3 global                           | 0                | Generate IRQ handler, Call HAL handler
+| SDMMC1 global                           | 0                | none
+| UART4 global                            | 0                | Generate IRQ handler, Call HAL handler
+| DAM2 channel4 global                    | 0                | Generate IRQ handler, Call HAL handler
+| DAM2 channel5 global                    | 0                | Generate IRQ handler, Call HAL handler
+| I2C4 event                              | 0                | Generate IRQ handler, Call HAL handler
+| I2C4 error                              | 0                | Generate IRQ handler, Call HAL handler
+
+
+### Connectivity Peripherals Configuration
+
+| Peripheral   | Mode / Settings                                                                          | IRQ | DMA                                                   
+|:-------------|:-----------------------------------------------------------------------------------------|:----|:------------------------------------------------------
+| I2C4         | I2C, Standard Mode, Do Not Generate Function Call                                        | yes | no                                                    
+| SDMMC1       | SD 1 bit, Do Not Generate Function Call                                                  | yes | SDMMC1_RX = DMA2 Channel 5, SDMMC1_TX = DMA2 Channel 4
+| SPI1         | Full-Duplex Master, Hardware NSS Signal=Disable, Do Not Generate Function Call           | yes | no                                                    
+| UART4        | Asynchronous, Hardware Flow Control=Disable, 115200/8/N/1, Do Not Generate Function Call | yes | no                                                    
+| USART1       | Asynchronous, Hardware Flow Control=Disable, 115200/8/N/1, Do Not Generate Function Call | yes | no                                                    
+| USART2       | Asynchronous, Hardware Flow Control=CTS/RTS, 115200/8/N/1, Do Not Generate Function Call | yes | no                                                    
+| USART3       | Asynchronous, Hardware Flow Control=Disable, 115200/8/N/1, Do Not Generate Function Call | yes | no                                                     
 
 **STDIO** routed to ITM port (CMSIS-DAP)
 
 ### CMSIS-Driver Mapping
 
-| CMSIS-Driver | Peripheral | Routed to
-|:-------------|:-----------|----------
-| I2C4         |            | BG96 (U304)
-| MCI0         |            | Micro SD transceiver (U901)
-| SPI1         |            | W25Q16FWUXIE (U203) and BG96 (U304)
-| USART1       |            | ESP8285 (U601)
-| USART2       |            | BG96 (U304)
-| USART3       |            | BlueNRG-2 (U701)
-| USART4       |            | ZOE-M8G (U404)
+| CMSIS-Driver | Peripheral   | Routed to
+|:-------------|:-------------|----------
+| I2C4         | I2C4         | BG96 (U304)
+| MCI0         | SDMMC1       | Micro SD transceiver (U901)
+| SPI1         | SPI1         | W25Q16FWUXIE (U203) and BG96 (U304)
+| USART1       | USART1       | BG96 (U304)
+| USART2       | USART2       | BlueNRG-2 (U701)
+| USART3       | USART3       | ZOE-M8G (U404)
+| USART4       | UART4        | ESP8285 (U601)
 
 | CMSIS-Driver VIO  | Physical board hardware
 |:------------------|:-----------------------
