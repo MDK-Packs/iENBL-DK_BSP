@@ -63,8 +63,6 @@
       <book category="overview"  name="https://flex.com/resources/ienbl"     title="iENBL IoT development platform"/>
       <book category="overview"  name="Documents/Overview.pdf"               title="Overview"                   public="true"/>
       <book category="manual"    name="Documents/UM_Breakout_Board_v24.pdf"  title="Breakout Board User Manual" public="true"/>
-      <book category="schematic" name="Documents/Sch_froa_103_41_1_c.pdf"    title="Main Board Schematics"      public="true"/>
-      <book category="schematic" name="Documents/Sch_FROA_103_34_C_BooL.pdf" title="Breakout Board Schematics"  public="true"/>
       <mountedDevice    deviceIndex="0" Dvendor="STMicroelectronics:13" Dname="STM32L496QEIx"/> 
       <compatibleDevice deviceIndex="0" Dvendor="STMicroelectronics:13" DsubFamily="STM32L496QEx"/>
       <feature type="PWR"           n="5"                name="USB Powered"/>
