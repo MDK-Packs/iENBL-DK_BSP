@@ -196,6 +196,7 @@ extern void app_initialize (void);
 #define GNSS_EXT_INT_GPIO_Port GPIOE
 #define BLE_BOOT_Pin GPIO_PIN_14
 #define BLE_BOOT_GPIO_Port GPIOE
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
@@ -205,5 +206,3 @@ extern void app_initialize (void);
 #endif
 
 #endif /* __MAIN_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

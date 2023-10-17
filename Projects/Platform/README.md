@@ -3,12 +3,12 @@ Flex iENBL Platform Project
 
 - This board layer is configured using [*STM32CubeMX*](https://www.st.com/en/development-tools/stm32cubemx.html)
 - The board configuration is stored in the file `./RTE/Device/STM32L496QEIx/STCubeGenerated/STCubeGenerated.ioc`.
-- [Setup with classic Keil MDK](https://www.keil.com/pack/doc/STM32Cube)
-- It is a [CMSIS-RTOS v2](https://arm-software.github.io/CMSIS_5/RTOS2/html/index.html) based software template that can be further expanded.
+- [Setup with classic Keil MDK](https://www.keil.com/pack/doc/STM32Cube/html/index.html)
+- It is a [CMSIS-RTOS v2](https://arm-software.github.io/CMSIS-RTX/latest/index.html) based software template that can be further expanded.
 
 ## Keil RTX5 Real-Time Operating System
 
-The [Keil RTX5 RTOS](https://arm-software.github.io/CMSIS_5/RTOS2/html/rtx5_impl.html) 
+The [Keil RTX5 RTOS](https://arm-software.github.io/CMSIS-RTX/latest/cre_rtx_proj.html)
 implements the resource management. It is configured with the following settings:
 
 | Memory setting           | Size
