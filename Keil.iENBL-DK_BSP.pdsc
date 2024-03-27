@@ -7,6 +7,12 @@
   <repository type="git">https://github.com/MDK-Packs/iENBL-DK_BSP.git</repository>
 
   <releases>
+    <release version="0.2.0-dev0">
+      Example projects:
+      - Synchronize to CMSIS 6.0.0
+      CMSIS-Driver
+      - Update VIO to API 1.0.0
+    </release>
     <release version="0.1.0">
       Initial version.
     </release>
@@ -40,7 +46,7 @@
 
   <components>
     <!-- VIO component for iENBL -->
-    <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant= "iENBL" Cversion="1.0.0" Capiversion="0.1.0" condition="iENBL VIO">
+    <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant= "iENBL" Cversion="2.0.0" Capiversion="1.0.0" condition="iENBL VIO">
       <description>Virtual I/O implementation for Flex iENBL</description>
       <RTE_Components_h>
         #define RTE_VIO_BOARD
