@@ -66,6 +66,9 @@ PACK_DIRS=${PACK_DIRS//$PACK_WAREHOUSE/}
   
 # Specify file names to be added to pack base directory
 PACK_BASE_FILES="
+  LICENSE-Apache-2.0
+  LICENSE-BSD-3-Clause
+  LICENSES
 "
 
 ############ DO NOT EDIT BELOW ###########
